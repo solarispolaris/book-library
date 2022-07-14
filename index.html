@@ -55,16 +55,59 @@
         </div>
         
     </div>
+
+    <div class="content">
+        <div class="header">
+            <h1>Library Booklist</h1>
+        </div>
+        <div class="book-container">
+            <div class="book-header">
+                <h4>Book Shelf</h4>
+                <div class="book-btn-list">
+                    <button class="book-new shelf-btn">New Book</button>
+                    <button class="book-reset shelf-btn">Reset Display</button>
+                </div>
+            </div>
+            <div class="bookshelf">
+                <div class="book-card" data-position="1">
+                    <div class="main-details">
+                        <p class="book-title">Sample Title</p>
+                        <p class="book-author">John Smith</p>
+                    </div>
+                    <div class="card-btn-list">
+                        <button class="book-delete-btn">Delete</button>
+                    </div>
+                </div>
+                <div class="book-card" data-position="2">
+                    <div class="main-details">
+                        <p class="book-title">Another Title</p>
+                        <p class="book-author">John Jones</p>
+                    </div>
+                    <div class="card-btn-list">
+                        <button class="book-delete-btn">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
    
     <script>
 
         const wrapper = document.querySelector(".sidebar");
         const exitBtn = document.querySelector(".close-btn")
-        wrapper.style.width = "20vw";
+        const newBtn = document.querySelector(".book-new");
+        const bookForm = document.querySelector("form");
 
         exitBtn.addEventListener("click", e =>
         {
             wrapper.style.width = "0";
+        }, 0);
+
+        newBtn.addEventListener("click", e =>
+        {
+            bookForm.reset();
+            wrapper.style.width = "20vw";
         }, 0);
 
     </script>
