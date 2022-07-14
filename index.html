@@ -59,8 +59,13 @@
     <script>
 
         const wrapper = document.querySelector(".sidebar");
-
+        const exitBtn = document.querySelector(".close-btn")
         wrapper.style.width = "20vw";
+
+        exitBtn.addEventListener("click", e =>
+        {
+            wrapper.style.width = "0";
+        }, 0);
 
     </script>
 </body>
