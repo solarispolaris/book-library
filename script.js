@@ -63,7 +63,6 @@ function createBookButtons(book){
 
     //put elements in the correct containers
     trashcanBtn.appendChild(tcImage);
-
     btnContainer.appendChild(checkboxInput);
     btnContainer.appendChild(trashcanBtn);
 
@@ -81,7 +80,7 @@ function createBookElement(book){
     let bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
     //use last index of bookLibrary array to get number position and add it to data-position
-    bookCard.setAttribute("data-position", `${bookLibrary.length - 1}`);
+    bookCard.setAttribute("data-position", `${book.index}`);
 
     //create main details element
     const mainDetails = createMainDetails(book);
@@ -91,22 +90,44 @@ function createBookElement(book){
 
     //add the main details container to the main container
     bookCard.appendChild(mainDetails);
-
     //add the btn-container container to the main container
     bookCard.appendChild(btnContainer);
-    
-
     //add the main container to the bookshelf
-    bookShelf.appendChild(bookCard);
+    bookShelf.appendChild(bookCard).focus();
 }
 
 function reDisplayBooks(){
+    let bookList = document.querySelector(".bookshelf");
+    while(bookList.firstChild){
+        bookList.removeChild(bookList.firstChild);
+    }
+
     bookLibrary.forEach(index => createBookElement(index));
+}
+
+function addBook(){
+    let book = new Book("Hello World", "Solaire Ghost", "Sci-Fi", 250, true);
+    addBookToLibrary(book);
+    createBookElement(book);
 }
 
 
 
 const resetBtn = document.querySelector(".book-reset");
-//resetBtn.addEventListener("click", createBookElement, 0);
 
-createBookElement(new Book("Hello World", "Solaire Ghost", "Adventure", 100, true));
+resetBtn.addEventListener("click", addBook, 0);
+
+
+
+//default book creation
+let book1 = new Book("Sample Title", "John Smith", "Adventure", 100, true);
+let book2 = new Book("Another Rhyme", "Joe Hime", "Action", 10, false);
+let book3 = new Book("Hello World", "Solaire Ghost", "Sci-Fi", 250, true);
+
+addBookToLibrary(book1);
+addBookToLibrary(book2);
+addBookToLibrary(book3);
+
+createBookElement(book1);
+createBookElement(book2);
+createBookElement(book3);
