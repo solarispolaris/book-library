@@ -62,20 +62,28 @@
         </div>
         <div class="book-container">
             <div class="book-header">
-                <h4>Book Shelf</h4>
+                <h1>Book Shelf</h1>
                 <div class="book-btn-list">
-                    <button class="book-new shelf-btn">New Book</button>
-                    <button class="book-reset shelf-btn">Reset Display</button>
+                    <button class="book-new shelf-btn">
+                        <input type="image" src="images/plus-box-outline.png">
+                    </button>
+                    <button class="book-reset shelf-btn">
+                        <input type="image" src="images/reload.png">
+                    </button>
                 </div>
             </div>
             <div class="bookshelf">
                 <div class="book-card" data-position="1">
+                    
                     <div class="main-details">
                         <p class="book-title">Sample Title</p>
                         <p class="book-author">John Smith</p>
                     </div>
                     <div class="card-btn-list">
-                        <button class="book-delete-btn">Delete</button>
+                        <input type="checkbox" id="read-book">
+                        <button class="book-delete-btn">
+                            <input type="image" src="images/trash-can-outline.png">
+                        </button>
                     </div>
                 </div>
                 <div class="book-card" data-position="2">
@@ -84,7 +92,10 @@
                         <p class="book-author">John Jones</p>
                     </div>
                     <div class="card-btn-list">
-                        <button class="book-delete-btn">Delete</button>
+                        <input type="checkbox" id="read-book">
+                        <button class="book-delete-btn">
+                            <input type="image" src="images/trash-can-outline.png">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -99,6 +110,9 @@
         const newBtn = document.querySelector(".book-new");
         const bookForm = document.querySelector("form");
 
+        const bookcardOne = document.querySelector(`[data-position = "1"]`);
+        const orginalHeight = bookcardOne.offsetHeight;
+
         exitBtn.addEventListener("click", e =>
         {
             wrapper.style.width = "0";
@@ -109,6 +123,9 @@
             bookForm.reset();
             wrapper.style.width = "20vw";
         }, 0);
+
+        
+
 
     </script>
 </body>
