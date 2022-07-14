@@ -1,0 +1,29 @@
+*{
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+
+.sidebar{
+    min-width: 20vw;
+    min-height: 100vh;
+    position: fixed;
+    background-color: peachpuff;
+    display: flex;
+    flex-direction: column;
+}
+
+button.close-btn{
+    width: 10%;
+    height: 10%;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    align-self: flex-end;
+}
+
+button svg{
+    width:  2rem;
+    height:  2rem;
+}
