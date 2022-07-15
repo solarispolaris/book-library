@@ -34,9 +34,39 @@ function addBookToLibrary(book){
 }
 
 function removeBookFromLibrary(index){
+    index = parseInt(index);
     if(index < 0) return;
-    if(bookLibrary.length > 1 && index < bookLibrary.length)
+    if(bookLibrary.length > 0 && index < bookLibrary.length){
         bookLibrary.splice(index, 1);
+    }
+    
+}
+
+function reOrderBooks(index){
+    const bookList = document.querySelectorAll("[data-position]");
+    const tempArray = [];
+    //get every element with position value over the provided index value
+    bookList.forEach(book => {
+        if(parseInt(book.getAttribute("data-position")) > index)
+            tempArray.push(book);
+    });
+
+    //update the position of the items
+    for(let it = 0; it < tempArray.length; it++){
+        //button data element to change its value as well
+        const trashBtn = tempArray[it].querySelector('[data-index]');
+        tempArray[it].setAttribute("data-position", `${parseInt(index)+it}`);
+        trashBtn.setAttribute("data-index", `${parseInt(index)+it}`);
+    }
+
+}
+
+function removeBookElement(e){
+    const index = e.currentTarget.getAttribute("data-index");
+    removeBookFromLibrary(index);
+    reDisplayBooks();
+    reOrderBooks(index);
+
 }
 
 function createMainDetails(book){
@@ -66,6 +96,7 @@ function createBookButtons(book){
     //create button container
     let btnContainer = document.createElement("div");
     btnContainer.classList.add("card-btn-list");
+    
 
     //create checkbox input 
     let checkboxInput = document.createElement("input");
@@ -76,13 +107,16 @@ function createBookButtons(book){
 
     //create trashcan button
     let trashcanBtn = document.createElement("button");
-    trashcanBtn.classList.add("book-delete-btn")
+    trashcanBtn.classList.add("book-delete-btn");
+    //use last index of bookLibrary array to get number position and add it to data-index
+    trashcanBtn.setAttribute("data-index", `${book.index}`);
     let tcImage = document.createElement("input");
     tcImage.setAttribute("type", "image");
     tcImage.setAttribute("src", "images/trash-can-outline.png");
 
     //put elements in the correct containers
     trashcanBtn.appendChild(tcImage);
+    trashcanBtn.addEventListener("click", removeBookElement, 0);
     btnContainer.appendChild(checkboxInput);
     btnContainer.appendChild(trashcanBtn);
 
@@ -125,6 +159,8 @@ function reDisplayBooks(){
 
     bookLibrary.forEach(index => createBookElement(index));
 }
+
+
 
 //error check form
 function errorCheck(){
