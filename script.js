@@ -104,6 +104,10 @@ function createBookButtons(book){
     checkboxInput.setAttribute("name", "read-book");
     checkboxInput.setAttribute("value", `${book.hasRead}`);
     checkboxInput.checked = book.hasRead;
+    //add listener for when checkbox is checked and change book object value
+    checkboxInput.addEventListener("change", e => {
+        book.hasRead = e.currentTarget.checked;
+    },0);
 
     //create trashcan button
     let trashcanBtn = document.createElement("button");
@@ -114,9 +118,11 @@ function createBookButtons(book){
     tcImage.setAttribute("type", "image");
     tcImage.setAttribute("src", "images/trash-can-outline.png");
 
+    //add listener for removing an element
+    trashcanBtn.addEventListener("click", removeBookElement, 0);
+    
     //put elements in the correct containers
     trashcanBtn.appendChild(tcImage);
-    trashcanBtn.addEventListener("click", removeBookElement, 0);
     btnContainer.appendChild(checkboxInput);
     btnContainer.appendChild(trashcanBtn);
 
