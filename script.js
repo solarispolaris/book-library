@@ -9,6 +9,24 @@ function Book(bookTitle, bookAuthor, bookGenre, bookLength, bookRead){
 
 let bookLibrary = [];
 
+
+
+
+
+
+//open/close sidebar functions
+function closeSidebar(){
+    const wrapper = document.querySelector(".sidebar");
+    wrapper.style.width = "0";
+}
+
+function openSidebar(){
+    const wrapper = document.querySelector(".sidebar");
+    const bookForm = document.querySelector("form");
+    bookForm.reset();
+    wrapper.style.width = "20vw";
+}
+
 //adding/removing book objects from array functions
 function addBookToLibrary(book){
     book.index = bookLibrary.length;
@@ -29,10 +47,12 @@ function createMainDetails(book){
     let mdTitle = document.createElement("p");
     mdTitle.classList.add("book-title");
     mdTitle.textContent = book.title;
+    mdTitle.style.textTransform = "capitalize";
     //book author information
     let mdAuthor = document.createElement("p");
     mdAuthor.classList.add("book-author");
     mdAuthor.textContent = book.author;
+    mdAuthor.style.textTransform = "capitalize";
 
     //add title and author p elements to main details div container
     mainDetails.appendChild(mdTitle);
@@ -96,6 +116,7 @@ function createBookElement(book){
     bookShelf.appendChild(bookCard).focus();
 }
 
+//display library array container of books
 function reDisplayBooks(){
     let bookList = document.querySelector(".bookshelf");
     while(bookList.firstChild){
@@ -105,17 +126,76 @@ function reDisplayBooks(){
     bookLibrary.forEach(index => createBookElement(index));
 }
 
+//error check form
+function errorCheck(){
+    const bookForm = document.querySelector("form");
+
+    //Make Sure Title and Author values are include in form
+    if(bookForm.querySelector("[name = 'bookTitle']").value === "") return "Book Title is Required";
+    if(bookForm.querySelector("[name = 'bookAuthor']").value === "") return "Author Name is Required";
+
+    //Make sure page length is greater than 0
+    if(parseInt(bookForm.querySelector("[name = 'bookPages']").value) < 1) return "Page Length can not be less than 1";
+
+    //if all checks suceed return message
+    return "Suceed";
+
+}
+
 function addBook(){
-    let book = new Book("Hello World", "Solaire Ghost", "Sci-Fi", 250, true);
+
+    //error check
+    const errorMsg = errorCheck();
+    if (errorMsg !== "Suceed"){
+        alert(errorMsg);
+        return;
+    }
+
+    const bookForm = document.querySelector("form");
+    //book title
+    let title = bookForm.querySelector("[name = 'bookTitle']");
+    //author
+    let author = bookForm.querySelector("[name = 'bookAuthor']");
+    //book genre
+    let genre = bookForm.querySelector("[name = 'bookGenre']");
+    //max number of pages in book
+    let pageLength = bookForm.querySelector("[name = 'bookPages']");
+    //read book or not
+    let hasRead = bookForm.querySelector("[name = 'bookRead']");
+
+    //add book to library list
+    let book = new Book(title.value, author.value, genre.value, parseInt(pageLength.value), hasRead.checked);
     addBookToLibrary(book);
     createBookElement(book);
+
+    //close sidebar
+    closeSidebar();
 }
 
 
 
-const resetBtn = document.querySelector(".book-reset");
 
-resetBtn.addEventListener("click", addBook, 0);
+
+
+
+
+
+
+
+
+//close button on sidebar
+const exitBtn = document.querySelector(".close-btn");
+exitBtn.addEventListener("click", closeSidebar, 0);
+//open sidebar button
+const newBtn = document.querySelector(".book-new");
+newBtn.addEventListener("click", openSidebar, 0);
+//reset button
+const resetBtn = document.querySelector(".book-reset");
+resetBtn.addEventListener("click", reDisplayBooks, 0);
+
+//add new book from form
+const addFormBookBtn = document.querySelector(".form-add-btn");
+addFormBookBtn.addEventListener("click", addBook, 0);
 
 
 

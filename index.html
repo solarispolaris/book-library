@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-option">
                         <label for="form-book-pages">Number of Pages</label>
-                        <input type="number" id="form-book-pages" name="bookPages" min="1" >
+                        <input type="number" id="form-book-pages" name="bookPages" value="1" min="1" >
                     </div>
                     <div class="form-option-checkbox">
                         <label for="form-book-read">Already Read?</label>
@@ -72,35 +72,11 @@
                     </button>
                 </div>
             </div>
-            <div class="bookshelf">
-
-            </div>
+            <div class="bookshelf"></div>
         </div>
 
     </div>
    
-    <script>
 
-        const wrapper = document.querySelector(".sidebar");
-        const exitBtn = document.querySelector(".close-btn")
-        const newBtn = document.querySelector(".book-new");
-        const bookForm = document.querySelector("form");
-
-
-        exitBtn.addEventListener("click", e =>
-        {
-            wrapper.style.width = "0";
-        }, 0);
-
-        newBtn.addEventListener("click", e =>
-        {
-            bookForm.reset();
-            wrapper.style.width = "20vw";
-        }, 0);
-
-        
-
-
-    </script>
 </body>
 </html>
